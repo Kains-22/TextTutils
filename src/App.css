@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -33,6 +33,28 @@
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(340deg);
   }
 }
+
+.blank {
+  color: blue;
+  text-align: center;
+  margin-top: 15%;
+}
+
+nav ul {
+  display: flex;
+  margin: 3% 0%;
+}
+
+nav ul li {
+  text-decoration: none;
+  list-style: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 3px 5%;
+} */
+
+
+
