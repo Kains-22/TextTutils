@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export default function Navbar(props) {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           {props.title}
@@ -30,37 +30,6 @@ export default function Navbar(props) {
               <a className="nav-link" href="/">
                 Link
               </a>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="/"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
             </li>
           </ul>
           <form className="d-flex" role="search">

@@ -9,7 +9,6 @@ function App() {
       <Navbar title="TextTutils" />
       <div className="container">
         <TextForm heading="Enter The Text To Analyze" />
-
       </div>
     </>
   );
