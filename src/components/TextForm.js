@@ -1,58 +1,68 @@
 import React, { useState } from 'react'
 
+
 export default function TextForm(props) {
-   
-
-        const [text, setText] = useState('Enter Text Here');
-        const [currentColorIndex, setCurrentColorIndex] = useState(0);
-        const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange', 'pink', 'brown', 'cyan'];
-        const handlupclick = () => {
-            console.log("Uppercase was Clicked" + text);
-            let newtext = text.toUpperCase();
-            setText(newtext)
-            console.log(newtext);
-        }
-        const handleonchange = (event) => {
-            console.log("Uppercase was Clicked");
-            setText(event.target.value)
-        }
-        const handleloclick = () => {
-            console.log("Lower class was Clicked" + text);
-            let newtext = text.toLowerCase()
-            setText(newtext)
-            console.log(newtext);
-        }
-
-
-        const changecolor = () => {
-            // Change text color to the next color in the list
-            let previewText = document.getElementById('previewText');
-            if (previewText) {
-                const nextColor = colors[currentColorIndex % colors.length];
-                previewText.style.color = nextColor;
-                setCurrentColorIndex(currentColorIndex + 1);
-            }
-        }
-        return (
-
-            <>
-                <div className="container">
-                    <h2>{props.heading} </h2>
-                    <div className="mb-3">
-
-                        <textarea className="form-control" id="exampleFormControlTextarea1" value={text} onChange={handleonchange} rows="6" ></textarea>
-                    </div>
-                    <button className="btn btn-primary mx-2" onClick={handlupclick}>Convert To UpperCase</button>
-                    <button className="btn btn-primary mx-2" onClick={handleloclick}>Convert To LowerCase</button>
-                    <button className="btn btn-primary mx-2" onClick={changecolor}>Color Change</button>
-                </div>
-                <div className="container my-3">
-                    <h2>YOUT TEXT SUMMARY</h2>
-                    <p>{text.split(" ").length}, {text.length} charcaters </p>
-                    <h3>PREVIEW</h3>
-                    <p id='previewText'>{text}</p>
-                </div>
-            </>
-        )
+    const handleUpClick = () => {
+        // console.log("Uppercase was clicked: " +  text);
+        let newText = text.toUpperCase();
+        setText(newText)
+        props.showAlert("converted Uppercase","sucess")
     }
 
+    const handleLoClick = () => {
+        let newText = text.toLowerCase();
+        setText(newText)
+        props.showAlert("converted Lower Case","sucess")
+    }
+
+    const handleClearClick = () => {
+        let newText = '';
+        setText(newText)
+    }
+
+    const handleOnChange = (event) => {
+        // console.log("On change");
+        setText(event.target.value)
+    }
+
+    // Credits: A
+    const handleCopy = () => {
+        console.log("I am copy");
+        var text = document.getElementById("myBox");
+        text.select();
+        text.setSelectionRange(0, 9999);
+        navigator.clipboard.writeText(text.value);
+    }
+
+    // Credits: Coding Wala
+    const handleExtraSpaces = () => {
+        let newText = text.split(/[ ]+/);
+        setText(newText.join(" "))
+    }
+
+    const [text, setText] = useState('');
+    // text = "new text"; // Wrong way to change the state
+    // setText("new text"); // Correct way to change the state
+    return (
+        <>
+            <div className="container" style={{ color: props.mode === 'dark' ? 'white' : '#042743' }}>
+                <h1>{props.heading}</h1>
+                <div className="mb-3">
+                    <textarea className="form-control" value={text} onChange={handleOnChange} style={{ backgroundColor: props.mode === 'dark' ? 'grey' : 'white', color: props.mode === 'dark' ? 'white' : '#042743' }} id="myBox" rows="8"></textarea>
+                </div>
+                <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to Uppercase</button>
+                <button className="btn btn-primary mx-1" onClick={handleLoClick}>Convert to Lowercase</button>
+                <button className="btn btn-primary mx-1" onClick={handleClearClick}>Clear Text</button>
+                <button className="btn btn-primary mx-1" onClick={handleCopy}>Copy Text</button>
+                <button className="btn btn-primary mx-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+            </div>
+            <div className="container my-3" style={{ color: props.mode === 'dark' ? 'white' : '#042743' }}>
+                <h2>Your text summary</h2>
+                <p>{text.split(" ").length} words and {text.length} characters</p>
+                <p>{0.008 * text.split(" ").length} Minutes read</p>
+                <h2>Preview</h2>
+                <p>{text.length > 0 ? text : "Enter something in the textbox above to preview it here"}</p>
+            </div>
+        </>
+    )
+}
